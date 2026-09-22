@@ -1,0 +1,14 @@
+---
+class: standard
+created: 2026-09-22T04:43:27Z
+id: 1
+priority: high
+status: backlog
+tags:
+- api
+- design
+title: 'Define the public API: bee_t, bee_stack_t, io callbacks, error enum'
+updated: 2026-09-22T04:43:27Z
+---
+
+Header-first design per skill libbee-core: no globals, no allocation in the core, three io callbacks, typed reads one-to-one with sunriser8/src/bee.c names, bee_raw for zero-copy blobs. Output: bee.h reviewed against sunriser8 call sites and the gnx needs before any .c is written.
