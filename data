@@ -1,0 +1,13 @@
+---
+class: standard
+created: 2026-09-22T04:43:28Z
+id: 4
+priority: medium
+status: backlog
+tags:
+- writer
+title: 'bee_make: CDB writer producing files Perl bee reads back equal'
+updated: 2026-09-22T04:43:28Z
+---
+
+Sorted keys, portable MsgPack subset only, temp path plus caller rename. Verified by reading the output with p5-beepack bin/bee.
