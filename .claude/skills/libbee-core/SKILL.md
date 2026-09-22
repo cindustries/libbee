@@ -34,28 +34,31 @@ very different hosts — the constraints below exist because of the weakest of t
 - **No allocation in the core.** Buffers come from the caller; sizes are explicit
   parameters; a value larger than the buffer is an error, not a truncation. The POSIX
   backend may allocate (mmap) because its hosts have memory; the core must not know.
-- **I/O is three callbacks** — read, seek, size — carried in the context, the same
-  discipline `cmp` uses for its reader/writer. The core never includes `<stdio.h>`
-  functionality beyond what cmp needs.
+- **I/O is a positional reader** (`read(ctx, off, buf, len)`, `size`, `close`) carried
+  in the context, plus a small `bee_fs_t` (open, write, unlink, list) for override
+  directories and writers. Positional instead of read+seek keeps the reader stateless
+  and lets the mmap backend implement `read` as `memcpy`. The core never includes
+  `<stdio.h>`.
 - **Errors are return codes**, one enum, with `bee_strerror()`. No logging inside the
   library; the caller decides what a missing key means.
 
 ## API surface (stable names)
 
-- Open/close: `bee_open(bee_t*, io)`, `bee_close`.
-- Typed reads on a stack: `bee_has`, `bee_bool`, `bee_u32`, `bee_i32`, `bee_bytes`
-  (into caller buffer, returns length), `bee_array` / `bee_map` (element count, then
-  `bee_next` iteration on the same context — sequential, like the firmware).
-- Raw access: `bee_raw` returns offset + length of the MsgPack value inside the file
-  so large blobs (fonts, images, firmware) stream without a copy on mmap hosts.
-- Stack: `bee_stack_init`, `bee_stack_push(bee_t*)` (least specific first), the
-  override directory is pushed as its own layer type, not as a `.bee`.
-- Writers: `bee_make_*` builds a new `.bee` into a temp path from sorted key/value
-  pairs and the caller renames; `bee_override_set` / `bee_override_unset` write or
-  unlink one hashed `.MP` file.
+Two levels, both in `bee.h` (full signatures: `docs/superpowers/specs/`):
 
-Keep the typed-read names one-to-one with what `sunriser8/src/bee.c` exposes today so
-the firmware port is a rename, not a rewrite.
+- **Strict, error-returning** — what bindings use: `bee_seek(stack, key, klen)` then
+  `bee_type`, `bee_get_bool` / `bee_get_u32` / `bee_get_i32` / `bee_get_bytes` /
+  `bee_get_count`, `bee_next` to iterate a container, `bee_raw` for offset + length of
+  the value bytes so large blobs stream without a copy on mmap hosts.
+- **Firmware-style convenience** — zero value on any error, one call: `bee_has`,
+  `bee_bool`, `bee_u32`, `bee_i32`, `bee_bytes`, `bee_array`, `bee_map`. These are the
+  names `sunriser8/src/bee.c` exposes today, so the firmware port is a rename.
+- Stack: `bee_stack_init(stack, fs)`, `bee_stack_push_file(stack, bee_t*)`,
+  `bee_stack_push_dir(stack, path)` — most specific layer first.
+- Writers: `bee_override_set*` / `bee_override_unset` / `bee_override_export` /
+  `bee_override_import` (no allocation); `bee_make_begin` / `bee_make_add*` /
+  `bee_make_finish` builds a `.bee` at a temp path the caller renames — host side, may
+  allocate, never needed on the firmware.
 
 ## Strictness
 
