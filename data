@@ -1,0 +1,13 @@
+---
+class: standard
+created: 2026-09-22T04:43:27Z
+id: 2
+priority: high
+status: backlog
+tags:
+- cdb
+title: Port the CDB reader from sunriser8/tinycdbff onto the io callbacks
+updated: 2026-09-22T04:43:27Z
+---
+
+Read-only cdb_seek equivalent, C99, no VLAs, works on a FatFS FIL and on an mmap window through the same callbacks.
