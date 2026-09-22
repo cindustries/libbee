@@ -1,0 +1,13 @@
+---
+class: standard
+created: 2026-09-22T04:43:28Z
+id: 3
+priority: medium
+status: backlog
+tags:
+- override
+title: 'Override directory: hashed .MP files, strict key check'
+updated: 2026-09-22T04:43:28Z
+---
+
+djb2 %08X.MP naming as in the firmware; the stored key must match length AND bytes (the firmware uses OR, hidden by the hash). Read, set, unset.
