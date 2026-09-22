@@ -1,0 +1,11 @@
+---
+class: standard
+created: 2026-09-22T04:43:29Z
+id: 6
+priority: medium
+status: backlog
+tags:
+- backend
+title: 'POSIX backend: mmap read, file write'
+updated: 2026-09-22T04:43:29Z
+---
