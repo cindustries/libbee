@@ -1,0 +1,14 @@
+---
+class: standard
+created: 2026-09-22T04:43:29Z
+id: 7
+priority: low
+status: backlog
+tags:
+- backend
+- sunriser8
+title: FatFS backend and the sunriser8 port
+updated: 2026-09-22T04:43:29Z
+---
+
+Replace sunriser8/src/bee.c with libbee plus bee_fatfs.c. Needs a ticket on the sunriser8 board when libbee is ready; toolchain there is gcc 4.9.
