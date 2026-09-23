@@ -1,6 +1,6 @@
 ---
 name: libbee-core
-description: "Load before implementing, refactoring or reviewing libbee — the portable C BeePack library: its API shape, the no-allocation and I/O-callback rules, the consumers (sunriser8 on STM32, gnx on i686/Android/iOS, p5-beepack via XS) and the fixture-based test discipline."
+description: "Load before implementing, refactoring or reviewing libbee — the portable C BeePack library: its API shape, the no-allocation and I/O-callback rules, the consumers (sunriser8 on STM32, CanLin on i686/Android/iOS, p5-beepack via XS) and the fixture-based test discipline."
 user-invocable: false
 allowed-tools: Read, Grep, Glob
 model: sonnet
@@ -10,7 +10,7 @@ model: sonnet
 
 libbee is the C reference implementation of the BeePack format (skill
 `beepack-format`). It replaces `sunriser8/src/bee.c`, becomes the engine behind
-`p5-beepack` (XS via an Alien) and is the storage layer of gnx. One code base, four
+`p5-beepack` (XS via an Alien) and is the storage layer of CanLin. One code base, four
 very different hosts — the constraints below exist because of the weakest of them.
 
 ## Consumers and what each one forbids
@@ -18,7 +18,7 @@ very different hosts — the constraints below exist because of the weakest of t
 | Consumer | Host | Consequence for libbee |
 |---|---|---|
 | sunriser8 | STM32F1/F4, FatFS, **gcc 4.9**, no heap in the storage path | C99 only, no VLAs, no `malloc` in the core, I/O behind callbacks |
-| gnx | i686 **without SSE**, musl, static; Android/iOS via SDL | no SIMD, no glibc-only calls, mmap is a backend detail |
+| CanLin | i686 **without SSE**, musl, static; Android/iOS via SDL | no SIMD, no glibc-only calls, mmap is a backend detail |
 | p5-beepack | XS, any Linux/BSD | a plain C API with error returns, no `exit`, no `printf` |
 
 ## Shape
@@ -28,7 +28,7 @@ very different hosts — the constraints below exist because of the weakest of t
 - **Backends**: `bee_posix.c` (mmap-backed read, file-backed write) and `bee_fatfs.c`
   (FatFS `FIL`). A consumer links exactly one, or provides its own callback set.
 - **No globals.** Every open file is a `bee_t`, every layered lookup a `bee_stack_t`
-  the caller owns and initialises. Several stacks may be open at once — gnx holds one
+  the caller owns and initialises. Several stacks may be open at once — CanLin holds one
   per module. The firmware's `bee_obj` / `beepack_in` / shared `FIL` pattern is what
   this library retires.
 - **No allocation in the core.** Buffers come from the caller; sizes are explicit
