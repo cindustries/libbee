@@ -7,4 +7,4 @@ Android, iOS and the Perl `BeePack` distribution (via XS).
 
 Format: `.claude/skills/beepack-format/SKILL.md`. Library rules:
 `.claude/skills/libbee-core/SKILL.md`. Sibling projects: `p5-beepack` (Perl reference
-writer and `bee` CLI), `sunriser8` (firmware consumer), `gnx` (runtime consumer).
+writer and `bee` CLI), `sunriser8` (firmware consumer), `canlin` (runtime consumer).

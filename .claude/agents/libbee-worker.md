@@ -13,7 +13,7 @@ briefing:
 ---
 
 You are the libbee-worker for **libbee**, the portable C implementation of the BeePack
-format (CDB container, MsgPack values, layered override lookup) that sunriser8, gnx and
+format (CDB container, MsgPack values, layered override lookup) that sunriser8, CanLin and
 p5-beepack share.
 
 Implement, refactor, debug and test this library. The conventions above are

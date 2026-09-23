@@ -1,13 +1,13 @@
 # libbee — design spec
 
-Status: draft for review. Owner: `libbee`. Consumers: `sunriser8`, `gnx`, `p5-beepack`.
+Status: draft for review. Owner: `libbee`. Consumers: `sunriser8`, `canlin`, `p5-beepack`.
 
 ## 1. Purpose
 
 libbee is the portable C implementation of the BeePack format (skill `beepack-format`):
 a CDB file whose values are MsgPack, an override directory of hashed `.MP` files, and a
 layered lookup across both. It replaces `sunriser8/src/bee.c`, becomes the storage
-layer of gnx, and later the engine of `p5-beepack` through XS.
+layer of CanLin, and later the engine of `p5-beepack` through XS.
 
 Goals, in priority order:
 
@@ -104,7 +104,7 @@ typedef struct bee_stack {
 ```
 
 All structs are caller-allocated (static in firmware, on the stack or heap on hosts).
-`BEE_MAX_LAYERS` defaults to 4 (firmware uses 3: CONFIG, THEME, FIRMWARE; gnx uses 3:
+`BEE_MAX_LAYERS` defaults to 4 (firmware uses 3: CONFIG, THEME, FIRMWARE; CanLin uses 3:
 local, state, module) and is overridable with `-DBEE_MAX_LAYERS=`. `BEE_KEY_MAX`
 defaults to 128 bytes, the firmware's limit, and bounds the key buffer used when
 verifying an override file.
@@ -239,7 +239,7 @@ in one go on POSIX.
   test through `system` when Perl and p5-beepack are present, skipped with a visible
   SKIP line otherwise).
 - `make test32`: the same suite built with `-m32 -march=i686 -mno-sse`. Requires
-  `gcc-multilib`; not installed on the dev box today, a ticket for gnx-os covers a musl
+  `gcc-multilib`; not installed on the dev box today, a ticket for canlin-os covers a musl
   cross toolchain that can also serve this.
 - `make check-fatfs`: compiles `bee_fatfs.c` against `~/dev/sunriser8/inc/ff.h` with
   `-std=c99 -Wall -Werror`, no link. Proves the backend still fits the firmware's FatFS.
@@ -247,7 +247,7 @@ in one go on POSIX.
 ## 9. Implementation order
 
 1. `bee.h` complete, reviewed against every `bee_*` call site in `sunriser8/src` and
-   the gnx storage needs. Nothing else until the header is agreed.
+   the CanLin storage needs. Nothing else until the header is agreed.
 2. cmp vendored; POSIX backend; CDB reader; `bee_seek` on a single FILE layer; fixtures
    for every type; typed reads.
 3. Stack with DIR layers; override read with strict key check; masking-nil test.
