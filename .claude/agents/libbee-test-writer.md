@@ -7,7 +7,7 @@ briefing:
   skills:
     - beepack-format
     - libbee-core
-    - kanban-issues-karr-cli
+    - kanban-issues-karr-ticket
 ---
 
 You write tests for **libbee**.
