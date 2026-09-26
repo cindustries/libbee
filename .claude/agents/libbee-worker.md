@@ -2,7 +2,6 @@
 name: libbee-worker
 description: "Default libbee worker — implement, refactor, debug and test the portable C BeePack library: bee.h/bee.c, the CDB reader/writer, the POSIX (mmap) and FatFS backends, the layered stack and override-directory code, the Makefile. Pre-loaded with the BeePack format, the libbee architecture rules and Getty's git conventions. Leaves a commit-ready tree; never commits — commits belong to the dispatching agent."
 model: inherit
-allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 briefing:
   skills:
     - beepack-format
