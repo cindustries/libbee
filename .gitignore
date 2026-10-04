@@ -53,3 +53,7 @@ config.yml
 *.so
 build/
 t/*.t.bin
+
+# skilletor: Config und Ignore-Block committen
+!.claude/skilletor.json
+!.claude/.gitignore
