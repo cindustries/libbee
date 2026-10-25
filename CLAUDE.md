@@ -10,8 +10,9 @@ Build and test: `make`, `make test`; always also
 
 ## Delegation
 
-Delegate behavior-relevant code to the right agent instead of touching it yourself —
-principle and lane are in `.claude/rules/libbee-rules.md`.
+Delegate behavior-relevant code to the right agent instead of touching it yourself — the
+principle is a shared house rule (skilletor bundle `getty-house@getty`), the lane is in
+`.claude/rules/libbee-rules.md`.
 
 | Task | Agent |
 |---|---|

@@ -15,6 +15,9 @@
       "getty-git-usage@getty",
       "kanban-issues-karr-coordination@karr",
       "kanban-issues-karr-ticket@karr"
+    ],
+    "bundles": [
+      "getty-house@getty"
     ]
   },
   "targets": [
