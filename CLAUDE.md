@@ -21,6 +21,6 @@ principle is a shared house rule (skilletor bundle `getty-house@getty`), the lan
 
 The agents carry their skills via `briefing.skills` (see `.claude/agents/`); the main
 agent delegates rather than loading them. Skill sources live under `.claude/skills/` —
-`beepack-format` (the on-disk format, owned here, hardlinked into `canlin`) and
+`beepack-format` (the on-disk format, owned here; `canlin` installs it with skilletor) and
 `libbee-core` (library architecture and API). Work is tracked on the local `karr`
 board; cross-repo protocol: skill `canlin-coordination` in `~/dev/canlin`.
