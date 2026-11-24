@@ -19,7 +19,7 @@ principle is a shared house rule (skilletor bundle `getty-house@getty`), the lan
 | Implement / refactor / debug `bee.c`, backends, headers, Makefile | `libbee-worker` (default) |
 | Write or extend tests and fixtures under `t/` | `libbee-test-writer` |
 
-The agents carry their skills via `briefing.skills` (see `.claude/agents/`); the main
+The agents carry their skills via `skills:` (see `.claude/agents/`); the main
 agent delegates rather than loading them. Skill sources live under `.claude/skills/` —
 `beepack-format` (the on-disk format, owned here; `canlin` installs it with skilletor) and
 `libbee-core` (library architecture and API). Work is tracked on the local `karr`
